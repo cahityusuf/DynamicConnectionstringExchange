@@ -1,0 +1,16 @@
+version: '3.4'
+
+volumes:
+  dynamicconnectionstringexchange-sqldata:
+    external: false
+
+services:
+
+  sqldata:
+    image: mcr.microsoft.com/azure-sql-edge
+
+  dynamicconnectionstringexchangeapi:
+    image: ${DOCKER_REGISTRY-}dynamicconnectionstringexchangeapi
+    build:
+      context: .
+      dockerfile: DynamicConnectionstringExchangeApi/Dockerfile
