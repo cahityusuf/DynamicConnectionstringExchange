@@ -11,20 +11,20 @@ namespace DynamicConnectionstringExchangeApi.Controllers
     public class ChangeConnectionStringController : ControllerBase
     {
         private readonly ChangeConnectionStringDbContext _dbContext;
-        private readonly IConfiguration _configuration; 
-        private readonly IConnectionStringProvider _connectionStringProvider;
+ 
 
-        public ChangeConnectionStringController(ChangeConnectionStringDbContext dbContext, IConfiguration configuration, IConnectionStringProvider connectionStringProvider)
+        public ChangeConnectionStringController(ChangeConnectionStringDbContext dbContext)
         {
             _dbContext = dbContext;
-            _configuration = configuration;
-            _connectionStringProvider = connectionStringProvider;
+
         }
 
         [HttpGet("getall")]
         public ActionResult Index()
         {
             var result = _dbContext.TestModel.ToList();
+
+            var aa = _dbContext.Database.GetConnectionString();
 
             return Ok(new ResponseModel<List<TestModel>>(result, _dbContext.Database.GetConnectionString()));
         }
